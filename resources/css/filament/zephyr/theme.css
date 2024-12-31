@@ -1,0 +1,15 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+/** Add Right border on sidebar */
+.fi-sidebar {
+    -o-border-image:linear-gradient(to bottom,transparent 10%,rgb(99 102 241 / 30%),rgba(var(--primary-500),30%),transparent 90%) 1;
+    border-image:linear-gradient(to bottom,transparent 10%,rgb(99 102 241 / 30%),rgba(var(--primary-500),30%),transparent 90%) 1;
+    border-right-width:1px;
+}
+
+/** Hide the user menu on guest panel */
+.fi-panel-guest .fi-user-menu {
+    display: none;
+}

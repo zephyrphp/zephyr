@@ -7,17 +7,20 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9"
+        "filament/filament": "^3.2",
+        "flowframe/laravel-trend": "^0.3.0",
+        "laravel/framework": "^11.36",
+        "laravel/tinker": "^2.10"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.23",
-        "laravel/pail": "^1.1",
-        "laravel/pint": "^1.13",
-        "laravel/sail": "^1.26",
+        "fakerphp/faker": "^1.24",
+        "laravel/pail": "^1.2",
+        "laravel/pint": "^1.18",
+        "laravel/sail": "^1.39",
         "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.1",
+        "nunomaduro/collision": "^8.5",
         "pestphp/pest": "^3.7",
+        "pestphp/pest-plugin-laravel": "^3.0",
         "rector/rector": "^2.0"
     },
     "autoload": {
@@ -40,7 +43,8 @@
         "lint": "pint",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -53,7 +57,8 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
-        "refactor": "rector"
+        "refactor": "rector",
+        "test": "pest"
     },
     "extra": {
         "laravel": {

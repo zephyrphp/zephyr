@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Http\Responses\LogoutResponse;
 use Carbon\CarbonImmutable;
+use Filament\Http\Responses\Auth\Contracts\LogoutResponse as FilamentLogoutResponse;
+use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentColor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +25,8 @@ final class AppServiceProvider extends ServiceProvider
     {
         $this->configureCommands();
         $this->configureDates();
+        $this->configureFilamentColor();
+        $this->configureFilamentLogout();
         $this->configureModels();
         $this->configurePasswordValidation();
         $this->configureUrl();
@@ -42,6 +48,29 @@ final class AppServiceProvider extends ServiceProvider
     private function configureDates(): void
     {
         Date::use(CarbonImmutable::class);
+    }
+
+    /**
+     * Configure the Filament color.
+     */
+    private function configureFilamentColor(): void
+    {
+        FilamentColor::register([
+            'danger' => Color::Red,
+            'gray' => Color::Gray,
+            'info' => Color::Blue,
+            'primary' => Color::Indigo,
+            'success' => Color::Green,
+            'warning' => Color::Orange,
+        ]);
+    }
+
+    /**
+     * Configure the Filament logout response.
+     */
+    private function configureFilamentLogout(): void
+    {
+        $this->app->bind(FilamentLogoutResponse::class, LogoutResponse::class);
     }
 
     /**
